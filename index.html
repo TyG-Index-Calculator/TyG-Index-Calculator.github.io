@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>TyG Index Calculator | Triglyceride-Glucose Index & Insulin Resistance</title>
+  <meta name="title" content="TyG Index Calculator | Triglyceride-Glucose Index & Insulin Resistance">
+  <meta name="description" content="Calculate your Triglyceride-Glucose (TyG) Index accurately with our free online calculator. Supports mg/dL and mmol/L. Evaluate insulin resistance, metabolic syndrome risk, and cardiovascular health.">
+  <meta name="keywords" content="TyG index calculator, triglyceride glucose index, insulin resistance calculator, TyG score, calculate insulin resistance without insulin, metabolic syndrome index">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://tyg-index-calculator.github.io/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tyg-index-calculator.github.io/">
+  <meta property="og:title" content="TyG Index Calculator | Triglyceride-Glucose Index Online">
+  <meta property="og:description" content="Free clinical TyG Index Calculator. Fast assessment of insulin resistance using fasting triglycerides and fasting glucose levels.">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://tyg-index-calculator.github.io/">
+  <meta property="twitter:title" content="TyG Index Calculator | Clinical Insulin Resistance Assessment">
+  <meta property="twitter:description" content="Evaluate insulin resistance and metabolic health with our fast TyG Index Calculator.">
+
+  <!-- Schema.org JSON-LD (MedicalWebPage, WebApplication, FAQPage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://tyg-index-calculator.github.io/#app",
+        "name": "TyG Index Calculator",
+        "url": "https://tyg-index-calculator.github.io/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://tyg-index-calculator.github.io/#webpage",
+        "url": "https://tyg-index-calculator.github.io/",
+        "name": "TyG Index Calculator & Clinical Guide to Insulin Resistance",
+        "description": "Comprehensive clinical tool and guide for calculating the Triglyceride-Glucose Index (TyG Index) to evaluate insulin sensitivity and cardiometabolic risks.",
+        "about": [
+          {"@type": "MedicalCondition", "name": "Insulin Resistance"},
+          {"@type": "MedicalCondition", "name": "Metabolic Syndrome"},
+          {"@type": "MedicalCondition", "name": "Non-alcoholic Fatty Liver Disease (MASLD)"}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://tyg-index-calculator.github.io/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the TyG Index?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Triglyceride-Glucose (TyG) index is a clinically validated, cost-effective surrogate marker for insulin resistance calculated from fasting blood glucose and fasting serum triglycerides."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is considered a normal TyG Index?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A TyG index below 8.5 is generally considered normal, reflecting preserved insulin sensitivity. Values between 8.5 and 8.8 indicate borderline insulin resistance, while scores of 8.8 and above strongly correlate with insulin resistance, non-alcoholic fatty liver disease (MASLD), and increased cardiovascular disease risk."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the TyG Index compare to HOMA-IR?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "While HOMA-IR requires measuring fasting insulin (which is expensive and lacks standardized lab assays worldwide), the TyG index relies only on routine lipid panels and fasting glucose. Multiple studies have shown TyG to be equally or more sensitive than HOMA-IR in predicting metabolic syndrome, MASLD, and type 2 diabetes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the mathematical formula for the TyG Index?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The standard formula is: ln( [Fasting Triglycerides (mg/dL) × Fasting Glucose (mg/dL)] / 2 ), where 'ln' stands for the natural logarithm."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --dark: #0f172a;
+      --slate: #334155;
+      --slate-light: #64748b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: var(--bg);
+      color: var(--slate);
+      line-height: 1.7;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Calculator Grid */
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (min-width: 840px) {
+      .calculator-layout { grid-template-columns: 1fr 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      color: var(--slate-light);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.925rem;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .input-unit-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+    input[type="number"] {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    select {
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background-color: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .btn-calc {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.875rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-calc:hover { background: var(--primary-dark); }
+    .btn-calc:active { transform: scale(0.99); }
+
+    /* Results Card */
+    .result-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .score-badge {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1;
+      margin: 1rem 0;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+      align-self: center;
+    }
+    .status-normal { background: #dcfce7; color: var(--success); }
+    .status-borderline { background: #fef3c7; color: var(--warning); }
+    .status-high { background: #fee2e2; color: var(--danger); }
+
+    .meter-container {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease-out, background-color 0.5s ease-out;
+      border-radius: 6px;
+    }
+    .meter-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--slate-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .result-summary {
+      text-align: left;
+      font-size: 0.95rem;
+      color: var(--slate);
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+
+    /* Content Typography */
+    .content-article {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+    .content-article h2 {
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin: 2.5rem 0 1rem;
+      letter-spacing: -0.01em;
+    }
+    .content-article h3 {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin: 1.5rem 0 0.75rem;
+    }
+    .content-article p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: var(--slate);
+    }
+    .content-article ul, .content-article ol {
+      margin: 0 0 1.5rem 1.5rem;
+    }
+    .content-article li {
+      margin-bottom: 0.5rem;
+    }
+
+    .formula-card {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.15rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    /* Table styling */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background-color: #f1f5f9;
+      color: var(--dark);
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* FAQ accordion styling */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      background: #fff;
+    }
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .faq-answer {
+      padding: 0 1.25rem 1rem;
+      color: var(--slate);
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary { list-style: none; }
+    details[open] summary { border-bottom: 1px solid var(--border); margin-bottom: 0.75rem; }
+
+    /* Footer & Disclaimer */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1rem;
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--slate-light);
+      font-size: 0.9rem;
+    }
+    .disclaimer-box {
+      max-width: 840px;
+      margin: 0 auto 1.5rem;
+      padding: 1rem;
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        TyG Calculator
+      </a>
+      <span style="font-size: 0.875rem; color: var(--slate-light); font-weight: 500;">Clinical Grade Tool</span>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Top Heading -->
+    <div style="text-align: center; max-width: 760px; margin: 0 auto 2.5rem;">
+      <h1>TyG Index Calculator</h1>
+      <p class="lead">Fast, accurate calculation of the Triglyceride-Glucose Index — the proven, insulin-free clinical biomarker for insulin resistance, metabolic syndrome, and MASLD assessment.</p>
+    </div>
+
+    <!-- Calculator Section -->
+    <div class="calculator-layout">
+      <!-- Input Card -->
+      <section class="card" aria-label="TyG Calculation Form">
+        <h2 style="font-size: 1.25rem; margin-bottom: 1.25rem; color: var(--dark);">Enter Fasting Lab Results</h2>
+        
+        <form id="tygForm" onsubmit="event.preventDefault(); calculateTyG();">
+          <div class="form-group">
+            <label for="tgValue">Fasting Triglycerides</label>
+            <div class="input-unit-group">
+              <input type="number" id="tgValue" step="any" min="1" placeholder="e.g., 150" required>
+              <select id="tgUnit" aria-label="Triglyceride Unit">
+                <option value="mgdl">mg/dL</option>
+                <option value="mmol">mmol/L</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gluValue">Fasting Blood Glucose</label>
+            <div class="input-unit-group">
+              <input type="number" id="gluValue" step="any" min="1" placeholder="e.g., 95" required>
+              <select id="gluUnit" aria-label="Glucose Unit">
+                <option value="mgdl">mg/dL</option>
+                <option value="mmol">mmol/L</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-calc">Calculate TyG Index</button>
+        </form>
+      </section>
+
+      <!-- Results Card -->
+      <section class="card result-box" aria-live="polite" aria-label="Calculation Results">
+        <span style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--slate-light);">Calculated TyG Index</span>
+        <div class="score-badge" id="tygScore">--</div>
+        <div class="status-badge" id="tygStatus" style="display: none;">Awaiting Data</div>
+
+        <div class="meter-container">
+          <div class="meter-fill" id="meterFill"></div>
+        </div>
+        <div class="meter-labels">
+          <span>&lt; 8.5 (Normal)</span>
+          <span>8.5 - 8.8 (Borderline)</span>
+          <span>&gt; 8.8 (High)</span>
+        </div>
+
+        <div class="result-summary" id="resultSummary">
+          Fill in your fasting laboratory values and click <strong>Calculate TyG Index</strong> to see your detailed clinical interpretation.
+        </div>
+      </section>
+    </div>
+
+    <!-- Long-Form In-Depth Clinical Article (Rank-Beater Content) -->
+    <article class="content-article">
+      <h2>What is the Triglyceride-Glucose (TyG) Index?</h2>
+      <p>
+        The <strong>Triglyceride-Glucose (TyG) index</strong> is a validated clinical metric used to evaluate <em>insulin sensitivity</em> and diagnose <em>insulin resistance (IR)</em>. First proposed by Simental-Mendía et al., the index combines two standard, inexpensive biomarkers found on a routine annual lipid panel and metabolic screening: <strong>fasting serum triglycerides</strong> and <strong>fasting plasma glucose</strong>.
+      </p>
+      <p>
+        Historically, measuring insulin resistance required either the complex, research-only hyperinsulinemic-euglycemic clamp or the <strong>HOMA-IR</strong> (Homeostatic Model Assessment of Insulin Resistance). However, HOMA-IR requires a direct fasting insulin assay—a test that is expensive, rarely ordered during standard checkups, and plagued by significant variability between diagnostic laboratories. The TyG index provides an accessible, standardized alternative that performs with comparable or even superior sensitivity.
+      </p>
+
+      <div class="formula-card">
+        TyG Index = ln [ (Fasting Triglycerides (mg/dL) × Fasting Glucose (mg/dL)) / 2 ]
+      </div>
+
+      <p><em>*Note: "ln" represents the natural logarithm (base e). If your laboratory values are measured in mmol/L, they must be converted to mg/dL before applying the natural log formula (Triglycerides: 1 mmol/L = 88.57 mg/dL; Glucose: 1 mmol/L = 18.018 mg/dL). Our calculator performs this conversion automatically.</em></p>
+
+      <h2>TyG Index Reference Ranges & Clinical Interpretation</h2>
+      <p>
+        Extensive epidemiological research spanning diverse cohorts worldwide has established clear diagnostic thresholds for the TyG index:
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>TyG Score</th>
+              <th>Status</th>
+              <th>Insulin Sensitivity</th>
+              <th>Cardiometabolic Risk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>&lt; 8.5</strong></td>
+              <td><span style="color: var(--success); font-weight: 700;">Normal</span></td>
+              <td>Optimal Insulin Sensitivity</td>
+              <td>Low baseline risk</td>
+            </tr>
+            <tr>
+              <td><strong>8.5 – 8.8</strong></td>
+              <td><span style="color: var(--warning); font-weight: 700;">Borderline / Mild IR</span></td>
+              <td>Declining Sensitivity</td>
+              <td>Moderate / Early metabolic dysfunction</td>
+            </tr>
+            <tr>
+              <td><strong>&gt; 8.8</strong></td>
+              <td><span style="color: var(--danger); font-weight: 700;">Elevated</span></td>
+              <td>Significant Insulin Resistance</td>
+              <td>High risk for T2D, MASLD, and Atherosclerosis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Why Is the TyG Index Important? Clinical Utility</h2>
+      <p>
+        Insulin resistance is the unifying pathophysiological defect behind the modern metabolic epidemic. By calculating your TyG index, clinicians and individuals can detect asymptomatic metabolic dysfunction years before overt Type 2 Diabetes is clinically diagnosed.
+      </p>
+      
+      <h3>1. Non-Alcoholic Fatty Liver Disease (MASLD / NAFLD)</h3>
+      <p>
+        The liver plays a central role in triglyceride synthesis. Elevated hepatic de novo lipogenesis directly causes higher circulating fasting triglycerides. Multiple large-scale cohort studies demonstrate that individuals with a TyG index greater than 8.8 have an exponentially increased risk of developing steatotic liver disease and hepatic fibrosis.
+      </p>
+
+      <h3>2. Atherosclerosis & Cardiovascular Disease (CVD)</h3>
+      <p>
+        Elevated TyG values are closely correlated with arterial stiffness, coronary artery calcification (CAC), and microvascular endothelial damage. Research published in the <em>Journal of the American Heart Association (JAHA)</em> highlights the TyG index as an independent predictor of myocardial infarction and ischemic stroke, even among non-diabetic populations.
+      </p>
+
+      <h3>3. Prediction of Type 2 Diabetes Mellitus</h3>
+      <p>
+        Fasting blood sugar alone often stays within "normal" limits (&lt; 100 mg/dL) for over a decade while pancreatic beta cells hypersecrete insulin to compensate. Because the TyG index incorporates triglycerides—which rise rapidly during early insulin resistance—it catches metabolic deterioration long before standard glucose tests flag a problem.
+      </p>
+
+      <h2>TyG Index vs. HOMA-IR: An Evidence-Based Comparison</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>TyG Index</th>
+              <th>HOMA-IR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Required Biomarkers</strong></td>
+              <td>Fasting Glucose + Triglycerides</td>
+              <td>Fasting Glucose + Fasting Insulin</td>
+            </tr>
+            <tr>
+              <td><strong>Cost & Accessibility</strong></td>
+              <td>Very Low (Standard lipid panel)</td>
+              <td>Moderate to High (Specialized test)</td>
+            </tr>
+            <tr>
+              <td><strong>Standardization</strong></td>
+              <td>Universal across all global labs</td>
+              <td>Poor (High inter-assay variation)</td>
+            </tr>
+            <tr>
+              <td><strong>Prediction of Fatty Liver</strong></td>
+              <td>Superior in multiple prospective trials</td>
+              <td>Moderate</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Evidence-Based Strategies to Lower Your TyG Index</h2>
+      <p>
+        Because the TyG index is governed entirely by glucose and triglyceride metabolism, lifestyle interventions yield rapid, measurable improvements within 8 to 12 weeks:
+      </p>
+      <ul>
+        <li><strong>Eliminate Refined Carbohydrates & Liquid Fructose:</strong> Added sugars and ultra-processed starches stimulate hepatic lipogenesis, dramatically elevating circulating triglycerides.</li>
+        <li><strong>Adopt Time-Restricted Eating or Low-Carb Nutrition:</strong> Reducing carbohydrate load and extending fasting windows lowers baseline insulin secretion and depletes excess hepatic glycogen and lipid stores.</li>
+        <li><strong>Zone 2 Cardiovascular Training & Resistance Exercise:</strong> Skeletal muscle is responsible for roughly 80% of postprandial glucose disposal. Muscle contraction activates GLUT4 translocation independently of insulin.</li>
+        <li><strong>Target Visceral Adiposity:</strong> Visceral fat directly drains into the portal vein, worsening hepatic insulin resistance. A modest 5–10% weight loss can normalize both glucose and lipid profiles.</li>
+        <li><strong>Consider Omega-3 Fatty Acids:</strong> High-purity EPA/DHA supplementation (2–4g daily under clinical guidance) is known to lower plasma triglycerides by 20–30%.</li>
+      </ul>
+
+      <!-- Interactive FAQ Section -->
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-question">What does a TyG score above 9.0 mean? <span>+</span></summary>
+          <div class="faq-answer">
+            A score above 9.0 reflects severe insulin resistance. It indicates that both your fasting triglycerides and fasting glucose are significantly elevated. This score warrants a comprehensive medical consultation, an HbA1c test, and targeted interventions to avert cardiometabolic complications.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Do I need to fast before doing this test? <span>+</span></summary>
+          <div class="faq-answer">
+            Yes. The TyG index requires strict 10 to 12-hour fasting laboratory results. Eating prior to blood collection temporarily spikes serum triglycerides and blood glucose, producing a falsely high score.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Can I calculate TyG if I'm taking statins or fibrates? <span>+</span></summary>
+          <div class="faq-answer">
+            Yes. However, lipid-lowering medications like fibrates or high-dose statins lower triglycerides artificially, which can result in an underestimated TyG score that reflects drug efficacy rather than native insulin sensitivity.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Is the TyG index validated for children and adolescents? <span>+</span></summary>
+          <div class="faq-answer">
+            Yes, several pediatric metabolic studies confirm that the TyG index is an effective, non-invasive biomarker for pediatric metabolic syndrome and early non-alcoholic fatty liver disease, although pediatric cutoff values are slightly lower (~8.1 to 8.4).
+          </div>
+        </details>
+      </div>
+
+    </article>
+  </main>
+
+  <footer>
+    <div class="disclaimer-box">
+      <strong>Medical Disclaimer:</strong> This TyG Index Calculator is provided solely for educational, research, and informational purposes. It does not constitute medical advice, clinical diagnosis, or treatment recommendations. Always consult a qualified physician or healthcare provider regarding any metabolic or cardiovascular condition.
+    </div>
+    <p>&copy; <span id="currentYear"></span> TyG Index Calculator. Open-source clinical assessment tool hosted on GitHub Pages.</p>
+  </footer>
+
+  <script>
+    // Set dynamic current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    function calculateTyG() {
+      let tg = parseFloat(document.getElementById('tgValue').value);
+      let glu = parseFloat(document.getElementById('gluValue').value);
+      const tgUnit = document.getElementById('tgUnit').value;
+      const gluUnit = document.getElementById('gluUnit').value;
+
+      if (isNaN(tg) || isNaN(glu) || tg <= 0 || glu <= 0) {
+        alert("Please enter valid, positive numbers for both triglycerides and glucose.");
+        return;
+      }
+
+      // Convert mmol/L to mg/dL if needed
+      // Triglycerides: 1 mmol/L = 88.57 mg/dL
+      if (tgUnit === 'mmol') {
+        tg = tg * 88.57;
+      }
+      // Glucose: 1 mmol/L = 18.0182 mg/dL
+      if (gluUnit === 'mmol') {
+        glu = glu * 18.0182;
+      }
+
+      // Standard TyG Formula: ln [ (TG * Glucose) / 2 ]
+      const tyg = Math.log((tg * glu) / 2);
+      const roundedTyG = tyg.toFixed(2);
+
+      // DOM Elements
+      const scoreEl = document.getElementById('tygScore');
+      const statusEl = document.getElementById('tygStatus');
+      const meterFill = document.getElementById('meterFill');
+      const summaryEl = document.getElementById('resultSummary');
+
+      scoreEl.textContent = roundedTyG;
+      statusEl.style.display = "inline-block";
+
+      // Calculate percentage for progress meter (Range mapped roughly 7.5 to 10.0)
+      let percentage = ((tyg - 7.5) / (10.0 - 7.5)) * 100;
+      percentage = Math.max(5, Math.min(100, percentage));
+      meterFill.style.width = percentage + "%";
+
+      // Classification Logic
+      if (tyg < 8.5) {
+        statusEl.textContent = "Normal / Insulin Sensitive";
+        statusEl.className = "status-badge status-normal";
+        meterFill.style.backgroundColor = "var(--success)";
+        summaryEl.innerHTML = `Your TyG score of <strong>${roundedTyG}</strong> falls into the normal range (&lt; 8.5). This indicates high insulin sensitivity and a low baseline risk for metabolic syndrome and cardiometabolic diseases.`;
+      } else if (tyg >= 8.5 && tyg <= 8.8) {
+        statusEl.textContent = "Borderline / Mild Insulin Resistance";
+        statusEl.className = "status-badge status-borderline";
+        meterFill.style.backgroundColor = "var(--warning)";
+        summaryEl.innerHTML = `Your TyG score of <strong>${roundedTyG}</strong> indicates borderline or mild insulin resistance. Lifestyle modifications focusing on reducing refined carbohydrates, strength training, and optimizing metabolic health are recommended.`;
+      } else {
+        statusEl.textContent = "Elevated / Insulin Resistant";
+        statusEl.className = "status-badge status-high";
+        meterFill.style.backgroundColor = "var(--danger)";
+        summaryEl.innerHTML = `Your TyG score of <strong>${roundedTyG}</strong> indicates significant insulin resistance (&gt; 8.8). This score strongly correlates with higher risks of Non-Alcoholic Fatty Liver Disease (MASLD), Type 2 Diabetes, and Atherosclerosis. A thorough medical consultation is advised.`;
+      }
+    }
+  </script>
+</body>
+</html>
